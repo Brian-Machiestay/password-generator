@@ -91,31 +91,40 @@ var upperCasedCharacters = [
 // Function to prompt user for password options
 function getPasswordOptions() {
   var selectedOptions = [];
-  var container = document.getElementById('options-container')
+  var container = document.getElementById('options-container');
   container.style.display = 'block';
-  var ok = document.querySelector('input[name="opts"]')
+  var ok = document.querySelector('input[name="opts"]');
+  var passLenObj = document.querySelector('#passwd');
   ok.addEventListener("click", function () {
     selectedOptions = [];
     var allInputs = document.querySelectorAll("input[type='checkbox']:checked");
+    var errorP = document.createElement('p');
+    errorP.setAttribute('class', 'error');
+    errorP.innerHTML = "At least one character type should be selected";
     for (let i = 0; i < allInputs.length; i++) {
        selectedOptions.push(allInputs[i].value);
     }
-    console.log(selectedOptions);
-    if (selectedOptions.length !== 0) { 
-      container.style.display = 'none';
+    if (selectedOptions.length !== 0) {
+      var len = document.querySelector('input[name="pass"]').value;
+      console.log(len);
+      
+      if (len !== 'between 10 and 64' && (parseInt(len) < 10 || parseInt(len) > 64)) {
+        errorP.innerHTML = "length should between 10 and 64";
+        passLenObj.append(errorP)
+      }
+      else {
+        selectedOptions.push(len);
+        container.style.display = 'none';
+      }
     }
     else {
-      var errorP = document.createElement('p');
-      errorP.setAttribute('class', 'error');
-      errorP.innerHTML = "At least one character type should be selected";
-      var passLenObj = document.querySelector('#passwd');
       if (document.querySelector(".error") == null) {
         document.querySelector("#options").style.height = '280px';
         passLenObj.append(errorP);
       }
     }
+    return(selectedOptions);
   });
-  console.log(selectedOptions);
 }
 
 // Function for getting a random element from an array
@@ -125,7 +134,10 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-  getPasswordOptions();
+  var options = getPasswordOptions();
+  for (let i in options) {
+
+  }
 
 }
 
