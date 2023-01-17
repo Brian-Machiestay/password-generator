@@ -95,9 +95,27 @@ function getPasswordOptions() {
   container.style.display = 'block';
   var ok = document.querySelector('input[name="opts"]')
   ok.addEventListener("click", function () {
-    
-    container.style.display = 'none';
+    selectedOptions = [];
+    var allInputs = document.querySelectorAll("input[type='checkbox']:checked");
+    for (let i = 0; i < allInputs.length; i++) {
+       selectedOptions.push(allInputs[i].value);
+    }
+    console.log(selectedOptions);
+    if (selectedOptions.length !== 0) { 
+      container.style.display = 'none';
+    }
+    else {
+      var errorP = document.createElement('p');
+      errorP.setAttribute('class', 'error');
+      errorP.innerHTML = "At least one character type should be selected";
+      var passLenObj = document.querySelector('#passwd');
+      if (document.querySelector(".error") == null) {
+        document.querySelector("#options").style.height = '280px';
+        passLenObj.append(errorP);
+      }
+    }
   });
+  console.log(selectedOptions);
 }
 
 // Function for getting a random element from an array
