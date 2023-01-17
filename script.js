@@ -90,23 +90,14 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  var bodytag = document.querySelector("body");
-  var opDiv = document.createElement("div");
-  opDiv.setAttribute("id", "pass-options");
-  var opStyles = {
-    "width": "20%",
-  "height": "40vh",
-  "position": "absolute",
-  "backgroundColor": "blue",
-  "top": "25%",
-  "left": "40%"
-  }
-  Object.keys(opStyles).forEach(it => { 
-    opDiv.style.it = opStyles.it;
-    console.log(opDiv.style.item);
+  var selectedOptions = [];
+  var container = document.getElementById('options-container')
+  container.style.display = 'block';
+  var ok = document.querySelector('input[name="opts"]')
+  ok.addEventListener("click", function () {
+    
+    container.style.display = 'none';
   });
-
-  bodytag.appendChild(opDiv);
 }
 
 // Function for getting a random element from an array
